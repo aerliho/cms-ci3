@@ -1,0 +1,15 @@
+{
+    "name": "amar/cms3",
+    "description": "cms with codeigniter 3",
+    "authors": [
+        {
+            "name": "amar-ronaldo",
+            "email": "amar.ronaldo.m@gmail.com"
+        }
+    ],
+    "require": {
+        "select2/select2": "4.0",
+        "components/jquery": "3.4",
+        "jenssegers/blade": "1.2"
+    }
+}
