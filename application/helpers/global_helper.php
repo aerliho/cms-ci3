@@ -30,7 +30,7 @@ if (!function_exists('now')) {
 	
 	function now()
 	{
-		return date('d-m-Y h:i:s');
+		return date('Y-m-d h:i:s');
 	}
 }
 
@@ -95,7 +95,52 @@ if (!function_exists('generate_form')) {
 	function add_form_field($list)
 	{
 		$CI = &get_instance();
+		if ($list['type'] == 'select') {
+			selectlist2($list);
+		}
 		$CI->data['form']['list'][] = $list;	
 	}
-	
+
+	function selectlist2(&$list)
+	{
+		$CI = &get_instance();
+		$opt_data = $list['select_option'];
+		
+		$tbl               = $opt_data['table'];
+		$id                = isset($opt_data['id']) ?$opt_data['id']: 'id';
+		$name              = isset($opt_data['name']) ? $opt_data['name'] : 'name';
+		$concat            = isset($opt_data['concat']) ? $opt_data['concat'] . 'as new_name' : '';
+		// $join              = $opt_data['join'] ? $opt_data['join'] : '';
+		$where             = isset($opt_data['where']) ?$opt_data['where']: [];
+		$selected          = isset($opt_data['selected']) ?$opt_data['selected']: '';
+		$multiple_selected = isset($opt_data['multiple_selected']) ?$opt_data['multiple_selected']:[];
+
+		$title             = $opt_data['title'] ; 
+		$select_query 	   = $id . ', ' .$name.', ' . $concat;
+		$order_direction   = isset($opt_data['order']) ? 'desc' : 'asc';
+		$order_name		   = isset($opt_data['order']) ? $opt_data['order'] : $name;
+		
+		if($where){
+			$CI->db->where($where);
+		}
+		
+		$opts              = $CI->db->order_by($order_name, $order_direction)
+							->select($select_query, FALSE)
+							->get($tbl)
+							->result_array();
+		$opt               = isset($opt_data['no_title']) ? '' : '<option value="">' . $title . '</option>';
+		$opt               .= isset($opt_data['add_new']) ? '<option value="addNew">+ Add '.$opt_data['add_new'].'</option>' : '';
+		
+		foreach ($opts as $l) {
+			if ($multiple_selected) {
+				$terpilih 	 = in_array($l[$id], $multiple_selected) ? 'selected' : '';
+			} else {
+				$terpilih 	 = $selected == $l[$id] ? 'selected' : '';
+			}
+
+			$new_name 	 = $concat != '' ? $l['new_name'] : $l[$name];
+			$opt 		.= "<option ".$terpilih." value=".$l[$id]." >". $new_name ."</option>";
+		}
+		$list['option'] = $opt;
+	}
 }

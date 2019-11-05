@@ -24,6 +24,12 @@ $hook['post_controller_constructor'][] = array(
     'filepath' => 'hooks'
 );
 
+$hook['post_controller_constructor'][] = array(
+    'class' => 'view',
+    'function' => 'generate_app_default',
+    'filename' => 'view.php',
+    'filepath' => 'libraries'
+);
 // view
 // render
 $hook['post_controller'][] = array(

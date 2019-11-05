@@ -13,7 +13,7 @@ class view
     public function render()
     {
         $this->generate_meta();
-        $this->generate_app_default();
+        $this->generate_custom_source();
         $this->generate_page_name();
         $this->generate_breadcrumb();
 
@@ -40,7 +40,7 @@ class view
         echo $this->CI->blade->make($this->CI->path, $this->CI->data);
     }
 
-    protected function generate_app_default()
+    public function generate_app_default()
     {
         // set baseurl
         $base_url = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443 ? 'http://' : 'https://';
@@ -64,22 +64,8 @@ class view
         $this->CI->path = isset($this->CI->path) ? $this->CI->path : $defaultLayout . '/' . $view;
 
         $this->CI->data['this_controller'] = $this->CI->data['base_url'] . $dir . $class . '/';
-
-
-
-        $this->CI->data['js_bundle'] = '';
-        if (isset($this->CI->data['data']['js'])) {
-            foreach ($this->CI->data['data']['js'] as $key => $value) {
-                $this->CI->data['js_bundle'] .= '<script src="' . base_url('assets/' . $value) . '" type="text/javascript"></script>';
-            }
-        }
-        $this->CI->data['css_bundle'] = '';
-        if (isset($this->CI->data['data']['css'])) {
-            foreach ($this->CI->data['data']['css'] as $key => $value) {
-                $this->CI->data['css_bundle'] .= '<link href="' . base_url('assets/' . $value) . '" rel="stylesheet" type="text/css">';
-            }
-        }
     }
+    
     protected function generate_meta()
     {
         $this->CI->data['meta_description'] = 'cms dengan system blade dan theme metronic';
@@ -95,6 +81,22 @@ class view
             $this->CI->data['page_name'] = $breadcrumb;
         }
     }
+    protected function generate_custom_source()
+    {
+        $this->CI->data['js_bundle'] = '';
+        if (isset($this->CI->data['data']['js'])) {
+            foreach ($this->CI->data['data']['js'] as $key => $value) {
+                $this->CI->data['js_bundle'] .= '<script src="' . base_url('assets/' . $value) . '" type="text/javascript"></script>';
+            }
+        }
+        $this->CI->data['css_bundle'] = '';
+        if (isset($this->CI->data['data']['css'])) {
+            foreach ($this->CI->data['data']['css'] as $key => $value) {
+                $this->CI->data['css_bundle'] .= '<link href="' . base_url('assets/' . $value) . '" rel="stylesheet" type="text/css">';
+            }
+        }
+    }
+    
     protected function generate_breadcrumb()
     {
         if (isset($this->CI->child_breadcrumb)) {

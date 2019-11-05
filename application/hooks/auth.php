@@ -11,7 +11,7 @@ class auth
     protected $id_auth_menu;
     protected $menu;
 
-    protected $breadcrumb;
+
 
     public function __construct()
     {
@@ -21,7 +21,9 @@ class auth
     }
     public function init()
     {
-        $this->generate_menu();
+        if (session_admin()) {
+            $this->generate_menu();
+        }
         // auth for perpage
         $this->auth_menu();
     }
@@ -136,8 +138,7 @@ class auth
             }
         }
 
-
-        $CI->data['breadcrumb'] = $breadcrumb;
+        $CI->data['breadcrumb'] = isset($breadcrumb) ? $breadcrumb :[];
         $CI->data['menu'] = $_menu;
     }
 

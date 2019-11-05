@@ -1,79 +1,78 @@
-
 <div class="form-group row">
-    <label for="example-text-input" class="offset-1 col-2 col-form-label">{{ $input['label'] }}</label>
+    <label for="example-text-input" class="offset-1 col-2 col-form-label">{{ $data['label'] }}</label>
     <div class="col-8">
-        @empty ($input['static_input'])
+        @empty ($data['static_input'])
              <input 
                 {{-- begin::type --}}
-                @isset($input['type'])
-                    type="{{ $input['type'] }}"
+                @isset($data['type'])
+                    type="{{ $data['type'] }}"
                 @endisset
 
-                @empty($input['type'])
+                @empty($data['type'])
                     type="text"        
                 @endempty
                 {{-- end::type --}}
                 
                 {{-- begin::name --}}
-                @isset($input['name'])
-                    name="{{ $input['name'] }}"
+                @isset($data['name'])
+                    name="{{ $data['name'] }}"
                 @endisset
                 {{-- end::name --}}
                 
                 {{-- begin::class --}}
-                @isset($input['class'])
-                    class="form-control {{ $input['class'] }}"
+                @isset($data['class'])
+                    class="form-control {{ $data['class'] }}"
                 @endisset
 
-                @empty($input['class'])
+                @empty($data['class'])
                     class="form-control"        
                 @endempty
                     {{-- end::class --}}
                 
                 {{-- begin::id --}}
-                @isset($input['id'])
-                    id="{{ $input['id'] }}"
+                @isset($data['id'])
+                    id="{{ $data['id'] }}"
                 @endisset
 
-                @empty($input['id'])
-                    id="{{ $input['name'] }}"        
+                @empty($data['id'])
+                    id="{{ $data['name'] }}"        
                 @endempty
                 {{-- end::id --}}
 
                 {{-- begin::placeholder --}}                    
-                @isset($input['placeholder'])
-                    placeholder="{{ $input['placeholder'] }}"
+                @isset($data['placeholder'])
+                    placeholder="{{ $data['placeholder'] }}"
                 @endisset
 
                 {{-- end::placeholder --}}
 
                 {{-- begin::value --}}
-                @isset($input['value'])
-                    value="{{ $input['value'] }}"
+                @isset($data['value'])
+                    value="{{ $data['value'] }}"
                 @endisset
 
-                @empty($input['value'])
+                @empty($data['value'])
                     value=""        
                 @endempty
                 {{-- end::placeholder --}}
 
-                @isset($input['readonly'])
+                @isset($data['readonly'])
                     readonly
                 @endisset
 
-                @isset($input['disabled'])
+                @isset($data['disabled'])
                     disabled="disabled"
                 @endisset
 
-                @isset($input['required'])
+                @isset($data['required'])
                     required
                 @endisset
 
             >
         @endempty
         
-        @isset($input['note'])
-            <span class="form-text text-muted">{{$input['note']}}</span>
+        @isset($data['note'])
+            <span class="form-text text-muted">{{$data['note']}}</span>
         @endisset
 
     </div>
