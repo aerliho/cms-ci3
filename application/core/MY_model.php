@@ -11,25 +11,30 @@ class MY_model extends CI_Model
         $this->table = $table;
         $this->tableAs = $table.' a';
     }
-    function records($select,$option= [])
+    function records($where = array(), $isTotal = 0)
     {
-        $order_id = $option['order']??'id';
-        $order_direction = $option['order']??'desc';
-        $order_id = $option['order'] ?? 'id';
-        
-        $this->datatables->select($select);
-        $this->db->order_by($order_id,$order_direction);
-        $this->datatables->where('is_delete',0);
-        $this->datatables->from($this->table);
-        $data = $this->datatables->generate();
-        echo $data;
-        exit;
+        // $alias['search_name']             = 'a.name';
+
+        // query_grid($alias, $isTotal);
+        $this->db->select("a.*");
+        $this->db->where('a.is_delete', 0);
+        $query = $this->db->get_where($this->tableAs, $where);
+
+        if ($isTotal == 0) {
+            $data = $query->result_array();
+        } else {
+            return $query->num_rows();
+        }
+
+        $ttl_row = $this->records($where, 1);
+
+        return ddi_grid($data, $ttl_row);
     }
 
     function insert($data)
     {
         $data['create_date']     = now();
-        $data['id_user_create']  = session_admin('id_user');
+        $data['user_id_create']  = sess_admin('id_user');
         $this->db->insert($this->table, array_filter($data));
         return $this->db->insert_id();
     }
@@ -37,10 +42,9 @@ class MY_model extends CI_Model
     function update($data, $id)
     {
         $where['id']             = $id;
-        $where['is_delete']      = 0;
         
         $data['modify_date']     = now();
-        $data['id_user_modify']  = session_admin('id_user');
+        $data['user_id_modify']  = sess_admin('id_user');
         $this->db->update($this->table, $data, $where);
         return $id;
     }
@@ -48,12 +52,10 @@ class MY_model extends CI_Model
     function delete($id)
     {
         $where['id']             = $id;
-        $where['is_delete']      = 0;
-
         $data['is_delete']       = 1;
 
         $data['delete_date']     = now();
-        $data['id_user_delete']  = session_admin('id_user');
+        $data['user_id_delete']  = sess_admin('id_user');
         $this->db->update($this->table, $data, $where);
         return $id;
     }

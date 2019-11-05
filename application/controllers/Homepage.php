@@ -62,7 +62,7 @@ class Homepage extends CI_Controller
 	private function _set_session($user)
 	{
 		$user_sess = [
-			'id_user' => $user['id'],
+			'user_id' => $user['id'],
 			'id_ref_user_group' => $user['id_ref_user_group'],
 			'username' => $user['username'],
 			'group' => $user['group'],

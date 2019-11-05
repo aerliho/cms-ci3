@@ -64,8 +64,7 @@ $autoload['libraries'] = array(
 	'form_validation',
 	'database',
 	'blade_library',
-	'view',
-	'datatables'
+	'view'
 );
 
 /*

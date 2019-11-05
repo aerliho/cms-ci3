@@ -50,6 +50,7 @@
 
 	@section('css_bundle')
 		{!! $css_bundle !!}
+		
 	@show
 
 </head>
@@ -107,12 +108,11 @@
 	<!--end::Page Vendors -->
 
 	<!--begin::Page Scripts(used by this page) -->
-	<script src="{{$base_url}}assets/js/admin/my_global.js" type="text/javascript"></script>
+	<script src="{{$base_url}}assets/js/demo1/pages/dashboard.js" type="text/javascript"></script>
 
 	<!--end::Page Scripts -->
 	@section('js_bundle')
 		{!! $js_bundle !!}
-		sc
 	@show
 </body>
 
