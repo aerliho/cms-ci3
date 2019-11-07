@@ -42,6 +42,12 @@ class view
 
     public function generate_app_default()
     {
+        
+        $this->CI->data['ADM_SESS'] = session_admin();
+        $this->CI->data['ADM_SESS']['first_character'] = strtoupper(
+            substr($this->CI->data['ADM_SESS']['first_name'],0,1)
+        );
+        
         // set baseurl
         $base_url = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443 ? 'http://' : 'https://';
         $base_url = str_replace($base_url . $_SERVER['HTTP_HOST'], '', base_url());

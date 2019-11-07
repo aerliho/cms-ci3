@@ -24,6 +24,8 @@ $CI =& get_instance();
                             @foreach ($form['list'] as $item)
                                 @includeWhen($item['type'] == 'input', 'admin.layouts.component.input', ['data' => $item])
                                 @includeWhen($item['type'] == 'select', 'admin.layouts.component.select', ['data' => $item])
+                                @includeWhen($item['type'] == 'textarea', 'admin.layouts.component.textarea', ['data' => $item])
+                                @includeWhen($item['type'] == 'fileupload', 'admin.layouts.component.fileupload', ['data' => $item])
 
                             @endforeach
                         </div>  
@@ -52,40 +54,24 @@ $CI =& get_instance();
     <script src="{{$base_url}}assets/vendors/custom/parsley/parsley.min.js" type="text/javascript"></script>
     <script src="{{$base_url}}assets/js/admin/my_form.js" type="text/javascript"></script>
 
+    {{-- datetimepicker --}}
     <script src="{{$base_url}}assets/js/demo1/pages/crud/forms/widgets/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    {{-- ckeditor --}}
+    <script src="{{$base_url}}assets/vendors/custom/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="{{$base_url}}assets/vendors/custom/ckfinder/ckfinder.js"></script>
+    
+    <script src="{{$base_url}}assets/js/admin/my_upload.js"></script>
 
     <script >
-        $('.my_select').select2(); 
+        jQuery(document).ready(function () {
 
-        // date time picker
-        $(".my_datetime").datetimepicker({
-            format: "yyyy-mm-dd hh:ii",
-            showMeridian: !0,
-            todayHighlight: !0,
-            autoclose: !0,
-            pickerPosition: "top-right"
-        })
-        
-        $(".my_date").datetimepicker({
-            format: "yyyy/mm/dd",
-            todayHighlight: !0,
-            autoclose: !0,
-            startView: 2,
-            minView: 2,
-            forceParse: 0,
-            pickerPosition: "top-right"
-        })
+            MY_form.select2('.my_select');    
 
-        $(".my_time").datetimepicker({
-            format: "hh:ii",
-            showMeridian: !0,
-            todayHighlight: !0,
-            autoclose: !0,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0,
-            pickerPosition: "top-right"
+            MY_form.datetime('.my_datetime');    
+            MY_form.date('.my_date');    
+            MY_form.time('.my_time');    
+
+            MY_form.ckeditor('.my_ckeditor')
         })
     </script>
 

@@ -71,6 +71,14 @@ class Homepage extends CI_Controller
 			'email' => $user['email']
 		];
 		$this->session->set_userdata(NAME_SESSION_ADMIN, $user_sess);
+
+		$this->load->helper('cookie');
+		$cookie = array(
+			'name'   => '8aAvm7crNnnYCp32v',
+			'value'  => rand(),
+			'expire' => '7200',
+		);
+		$this->input->set_cookie($cookie);
 	}
 	private function _set_cookies($user)
 	{
@@ -87,6 +95,7 @@ class Homepage extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		delete_cookie('remember_me');
+		delete_cookie('8aAvm7crNnnYCp32v');
 		redirect('');
 	}
 

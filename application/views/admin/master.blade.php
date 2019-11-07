@@ -83,6 +83,7 @@
 			};
 
 		var auth = @json($auth);
+		var base_url = '{{$base_url}}';
 		var this_controller = '{{$this_controller}}';
 
 

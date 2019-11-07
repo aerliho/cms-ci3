@@ -32,11 +32,11 @@ class Test extends CI_Controller
 		$page_name = $id ? 'Edit Records' : 'Add New Records';
 		$action = $this->data['this_controller'].'proses/'. $id;
 		generate_form($page_name,$action);
+		
 		add_form_field([
 			'type' =>'input',
 			'label' => 'nama saya',
 			'name' => 'nama',                      
-			'required' => true,         
 			'value'=> $data['nama'] ?? ''
 		]);
 
@@ -44,23 +44,65 @@ class Test extends CI_Controller
 			'type' => 'input',
 			'label' => 'Detail' ,
 			'name' => 'detail',
-			'required' => true,
 			'value'=> $data['detail'] ?? ''
 		]);
-		
+
+		add_form_field([
+			'type' => 'input',
+			'label' => 'DateTime',
+			'class' => 'my_datetime',
+			'name' => 'datetime',
+			'value'=> isset($data['datetime']) ? $data['datetime']:  '',
+			'readonly' => true,
+		]);
+
+		add_form_field([
+			'type' => 'input',
+			'label' => 'Date',
+			'class' => 'my_date',
+			'name' => 'date',
+			'value' => isset($data['date']) ? $data['date']: '',
+			'readonly' => true,
+		]);
+
+		add_form_field([
+			'type' => 'input',
+			'label' => 'Time',
+			'class' => 'my_time',
+			'name' => 'time',
+			'value' => isset($data['time'])? format_date('Y-m-d H:i',$data['time']) : '',
+			'readonly' => true,
+		]);
+
 		add_form_field([
 			'type' => 'select',
 			'label' => 'Status Publish' ,
 			'name' => 'id_ref_status_publish',
-			'required' => true,
 			'select_option' => [
 				'table' => 'ref_status_publish',
 				'selected' => $data['id_ref_status_publish'] ?? '',
 				'title' =>'Status Publish'
 			]
 		]);
+
+		add_form_field([
+			'type' => 'textarea',
+			'label' => 'ckeditor' ,
+			'name' => 'ckeditor',
+			'id' => 'ckeditor1',
+			'value' => $data['ckeditor'] ?? '',
+		]);
+
+		add_form_field([
+			'type' => 'fileupload',
+			'label' => 'Upload File' ,
+			'name' => 'fileupload',
+			'note'=> 'Max file size is 1MB and max number of files is 5.'
+		]);
 		
 		$this->child_breadcrumb = $page_name;
+		// print_r($this);
+		// exit;/
 	}
 	public function proses($id='')
 	{

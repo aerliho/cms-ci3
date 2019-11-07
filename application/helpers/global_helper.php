@@ -33,6 +33,14 @@ if (!function_exists('now')) {
 		return date('Y-m-d h:i:s');
 	}
 }
+if (!function_exists('format_date')) {
+	function format_date($newformat , $date)
+	{
+		$time = strtotime($date);
+		return date($newformat, $time);;
+	}
+}
+
 
 
 if (!function_exists('get_db')) {

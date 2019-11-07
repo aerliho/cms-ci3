@@ -32,7 +32,7 @@
             <!--end: My Cart -->
     
             <!--begin: Quick panel toggler -->
-            <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Quick panel" data-placement="right">
+            {{-- <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Quick panel" data-placement="right">
                 <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -41,12 +41,12 @@
                             <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" id="Combined-Shape" fill="#000000" opacity="0.3" />
                         </g>
                     </svg> </span>
-            </div>
+            </div> --}}
     
             <!--end: Quick panel toggler -->
     
             <!--begin: Language bar -->
-            <div class="kt-header__topbar-item kt-header__topbar-item--langs">
+            {{-- <div class="kt-header__topbar-item kt-header__topbar-item--langs">
                 <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
                     <span class="kt-header__topbar-icon">
                         <img class="" src="{{$base_url}}assets/media/flags/020-flag.svg" alt="" />
@@ -77,7 +77,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
     
             <!--end: Language bar -->
     
@@ -86,11 +86,11 @@
                 <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
                     <div class="kt-header__topbar-user">
                         <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
-                        <span class="kt-header__topbar-username kt-hidden-mobile">Sean</span>
+                        <span class="kt-header__topbar-username kt-hidden-mobile">{{$ADM_SESS['first_name']}}</span>
                         <img class="kt-hidden" alt="Pic" src="{{$base_url}}assets/media/users/300_25.jpg" />
     
                         <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                        <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
+                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{$ADM_SESS['first_character']}}</span>
                     </div>
                 </div>
                 <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
@@ -101,15 +101,15 @@
                             <img class="kt-hidden" alt="Pic" src="{{$base_url}}assets/media/users/300_25.jpg" />
     
                             <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                            <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">S</span>
+                        <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">{{$ADM_SESS['first_character']}}</span>
                         </div>
                         <div class="kt-user-card__name">
-                            Sean Stone
+                            {{$ADM_SESS['first_name']}}
                         </div>
-                        <div class="kt-user-card__badge">
-                            <span class="btn btn-success btn-sm btn-bold btn-font-md">23
+                        {{-- <div class="kt-user-card__badge">
+                                <span class="btn btn-success btn-sm btn-bold btn-font-md">23
                                 messages</span>
-                        </div>
+                        </div> --}}
                     </div>
     
                     <!--end: Head -->
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class="kt-notification__item">
+                        {{-- <a href="#" class="kt-notification__item">
                             <div class="kt-notification__item-icon">
                                 <i class="flaticon2-mail kt-font-warning">
                                 </i>
@@ -143,8 +143,8 @@
                                     Inbox and tasks
                                 </div>
                             </div>
-                        </a>
-                        <a href="#" class="kt-notification__item">
+                        </a> --}}
+                        {{-- <a href="#" class="kt-notification__item">
                             <div class="kt-notification__item-icon">
                                 <i class="flaticon2-rocket-1 kt-font-danger">
                                 </i>
@@ -157,8 +157,8 @@
                                     Logs and notifications
                                 </div>
                             </div>
-                        </a>
-                        <a href="#" class="kt-notification__item">
+                        </a> --}}
+                        {{-- <a href="#" class="kt-notification__item">
                             <div class="kt-notification__item-icon">
                                 <i class="flaticon2-hourglass kt-font-brand">
                                 </i>
@@ -171,8 +171,8 @@
                                     latest tasks and projects
                                 </div>
                             </div>
-                        </a>
-                        <a href="#" class="kt-notification__item">
+                        </a> --}}
+                        {{-- <a href="#" class="kt-notification__item">
                             <div class="kt-notification__item-icon">
                                 <i class="flaticon2-cardiogram kt-font-warning">
                                 </i>
@@ -186,12 +186,12 @@
                                         pending</span>
                                 </div>
                             </div>
-                        </a>
+                        </a> --}}
                         <div class="kt-notification__custom kt-space-between">
-                            <a href="demo1/custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sign
+                            <a href="{{$base_url}}logout"  class="btn btn-label btn-label-brand btn-sm btn-bold">Sign
                                 Out</a>
-                            <a href="demo1/custom/user/login-v2.html" target="_blank" class="btn btn-clean btn-sm btn-bold">Upgrade
-                                Plan</a>
+                            {{-- <a href="demo1/custom/user/login-v2.html" target="_blank" class="btn btn-clean btn-sm btn-bold">Upgrade
+                                Plan</a> --}}
                         </div>
                     </div>
     
