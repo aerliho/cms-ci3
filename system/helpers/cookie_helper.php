@@ -108,6 +108,7 @@ if ( ! function_exists('delete_cookie'))
 	 */
 	function delete_cookie($name, $domain = '', $path = '/', $prefix = '')
 	{
-		set_cookie($name, '', '', $domain, $path, $prefix);
+		$_20year = time() + (10 * 365 * 24 * 60 * 60);
+		set_cookie($name, '', $_20year , $domain, $path, $prefix);
 	}
 }
