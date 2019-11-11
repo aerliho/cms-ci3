@@ -26,7 +26,6 @@ $CI =& get_instance();
                                 @includeWhen($item['type'] == 'select', 'admin.layouts.component.select', ['data' => $item])
                                 @includeWhen($item['type'] == 'textarea', 'admin.layouts.component.textarea', ['data' => $item])
                                 @includeWhen($item['type'] == 'fileupload', 'admin.layouts.component.fileupload', ['data' => $item])
-
                             @endforeach
                         </div>  
                         
@@ -60,19 +59,22 @@ $CI =& get_instance();
     <script src="{{$base_url}}assets/vendors/custom/ckeditor/ckeditor.js" type="text/javascript"></script>
     <script src="{{$base_url}}assets/vendors/custom/ckfinder/ckfinder.js"></script>
     
-    <script src="{{$base_url}}assets/js/admin/my_upload.js"></script>
+    {{-- <script src="{{$base_url}}assets/js/admin/my_upload.js"></script> --}}
 
     <script >
         jQuery(document).ready(function () {
-
             MY_form.select2('.my_select');    
-
             MY_form.datetime('.my_datetime');    
             MY_form.date('.my_date');    
             MY_form.time('.my_time');    
-
             MY_form.ckeditor('.my_ckeditor')
+            MY_form.fileupload('.my_fileUpload')
         })
     </script>
 
+@endsection
+
+@section('additional_html')
+    @parent
+    @include('admin.layouts.component._listFileupload')
 @endsection

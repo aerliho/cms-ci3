@@ -97,7 +97,7 @@ class Test extends CI_Controller
 			'type' => 'fileupload',
 			'label' => 'Upload File' ,
 			'name' => 'fileupload',
-			'note'=> 'Max file size is 1MB and max number of files is 5.'
+			'value' => $data['fileupload']??'',
 		]);
 		
 		$this->child_breadcrumb = $page_name;

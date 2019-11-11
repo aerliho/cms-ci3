@@ -17,11 +17,11 @@ $CI =& get_instance();
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
                     <div class="kt-portlet__head-actions">
-                        <a href="{{$this_controller}}export" class="kt-nav__link">
+                        {{-- <a href="{{$this_controller}}export" class="kt-nav__link">
                             <i class="kt-nav__link-icon la la-excel"></i>
                             <span class="kt-nav__link-text">Export Excel</span>
                         </a>
-                        &nbsp;
+                        &nbsp; --}}
                         <a href="{{$this_controller}}add" class="btn btn-brand btn-elevate btn-icon-sm">
                             <i class="la la-plus"></i>
                             New Record

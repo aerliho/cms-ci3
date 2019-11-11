@@ -40,3 +40,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 metronic/*
 application/views/cache/*
+assets/media/ckfinder/

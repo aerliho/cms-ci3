@@ -85,9 +85,11 @@
 		var auth = @json($auth);
 		var base_url = '{{$base_url}}';
 		var this_controller = '{{$this_controller}}';
-
-
 	</script>
+
+	@section('additional_html')
+		
+	@show
 
 	<!-- end::Global Config -->
 
@@ -113,7 +115,6 @@
 	<!--end::Page Scripts -->
 	@section('js_bundle')
 		{!! $js_bundle !!}
-		sc
 	@show
 </body>
 
