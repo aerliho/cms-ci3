@@ -43,7 +43,9 @@ let MY_form = function () {
                 .catch(err => console.log(err.stack));
         })
     }
+    // end ckeditor
 
+    // fileUpload
     function createFileUpload() {
         $('.my_fileUpload').each(function () {
             let $id_element = $(this).attr('id');
@@ -100,8 +102,7 @@ let MY_form = function () {
 
             });
             // 
-            console.log($(this).val());
-            let $_file = ($(this).val() ) ? $(this).val() : '';
+            let $_file = ($(this).val() != '' && $(this).val() != '[]') ? $(this).val() : '';
             if ($_file.length > 0) {
                 $('#diff_' + $id_element).val($_file)
                 generate_file($id_element)
@@ -110,10 +111,9 @@ let MY_form = function () {
         })
     }
 
-    // file_upload
     let generate_file = function ($fileUpload) {
         var $diff = $('#diff_' + $fileUpload).val();
-        var $data_file = ($diff != '' && $diff != '[]') ? JSON.parse($diff) : '';
+        var $data_file = ($diff != '' && $diff != '[]' && typeof $diff != 'undefined') ? JSON.parse($diff) : '';
 
         let $html = $('#template_fileUpload').html();
         let $res = '';
@@ -128,9 +128,8 @@ let MY_form = function () {
             $('#' + $fileUpload).parent().next().append($res)
         }
     }
-
-    let HandlebtnfileUploadDelete = function () {
-        $(document).on('click','.btnfileUploadDelete', function () {
+    let HandleBtnfileUploadDelete = function () {
+        $(document).on('click', '.btnfileUploadDelete', function () {
 
             let file_delete = $(this).parents('.kt-widget4__item').find('.kt-widget4__title').text().trim()
             let file_id = $(this).attr('fileuploadid')
@@ -146,6 +145,152 @@ let MY_form = function () {
         })
 
     }
+    //  endFileUpload
+
+    // ImageManager
+    function createImagemanager() {
+        $('.my_imagemanager').each(function () {
+            let $id_element = $(this).attr('id');
+            //  ckfinder integrate
+            $('#btn_' + $id_element).on('click', function () {
+                CKFinder.popup({
+                    chooseFiles: true,
+                    selectMultiple: true,
+                    debug: true,
+                    width: 800,
+                    height: 600,
+                    onInit: function (finder) {
+                        finder.on('files:choose', function (evt) {
+                            var form_input = $('#' + $id_element);
+                            var file_input = evt.data.files;
+                            var file_upload = form_input.val() != '' ? JSON.parse(form_input.val()) : [];
+                            var diff_file = [];
+
+                            for (var index_input = 0; index_input < file_input.length; index_input++) {
+                                // Check jika file tidak ada maka akan di push ke file_upload
+                                var test = true;
+                                if (file_upload.length != 0) {
+                                    var file_input_name = file_input.models[index_input].get('name');
+                                    var test_array = Array.from(file_upload)
+
+                                    var filtered = test_array.filter(function (el) {
+                                        return el.name == this;
+                                    }, file_input_name);
+                                    test = filtered.length == 0
+                                }
+                                if (test == true) {
+                                    let $new_file = {
+                                        url: file_input.models[index_input].getUrl(),
+                                        name: file_input.models[index_input].get('name'),
+                                        imgName: file_input.models[index_input].get('name'),
+                                        imgDesc: '',
+                                        extension: file_input.models[index_input].getExtension()
+                                    };
+                                    file_upload.push($new_file)
+                                    diff_file.push($new_file)
+                                }
+                            }
+                            form_input.val(JSON.stringify(file_upload))
+                            $('#diff_' + $id_element).val(JSON.stringify(diff_file))
+                            generate_image($id_element)
+
+
+                        });
+                        finder.on('file:choose:resizedImage', function (evt) {
+                            var output = $('#' + $input);
+                            output.val = evt.data.resizedUrl;
+                        });
+                    }
+                });
+
+
+            });
+            // 
+            let $_file = ($(this).val() != '' && $(this).val() != '[]') ? $(this).val() : '';
+            if ($_file.length > 0) {
+                $('#diff_' + $id_element).val($_file)
+                generate_image($id_element)
+            }
+
+        })
+    }
+
+    let generate_image = function ($Imagemanager) {
+        var $diff = $('#diff_' + $Imagemanager).val();
+        var $data_file = ($diff != '' && $diff != '[]' && typeof $diff != 'undefined') ? JSON.parse($diff) : '';
+
+        let $html = $('#template_Imagemanager').html();
+        let $res = '';
+        if ($data_file.length > 0) {
+            $data_file.forEach((file) => {
+                let $_res = $html;
+                $_res = $_res.replace('__link1__', file.url)
+                $_res = $_res.replace('__link2__', file.url)
+                $_res = $_res.replace('__imgDesc__', file.imgDesc != '' ? file.imgDesc :'')
+                $_res = $_res.replace('__imgName__', file.imgName != '' ? file.imgName : file.name)
+                $_res = $_res.replace('__idImagemanager__', $Imagemanager)
+                $res += $_res;
+            })
+            $('#' + $Imagemanager).parent().next().append($res)
+        }
+    }
+
+    let HandleChangeName = function () {
+        $(document).on('focusin', '.my_imagemanager_imgName', function () {
+            $(this).attr('temp_name', $(this).val());
+        })
+
+        $(document).on('focusout', '.my_imagemanager_imgName', function () {
+            var form_input = JSON.parse($('#imagemanager').val())
+            var changeValue = $(this).val()
+            var beforeValue = $(this).attr('temp_name');
+            form_input.forEach(function (item, i) {
+                if (item.imgName == beforeValue) form_input[i].imgName = changeValue;
+            });
+            $('#imagemanager').val(
+                JSON.stringify(form_input)
+            )
+        })
+    }
+    let HandleChangeDesc = function () {
+        $(document).on('focusin', '.my_imagemanager_imgDesc', function () {
+            var temp_desc = $(this).val()
+            $(this).attr('temp_desc', temp_desc);
+        })
+
+        $(document).on('blur', '.my_imagemanager_imgDesc', function () {
+            var form_input = JSON.parse($('#imagemanager').val())
+            var changeValue = $(this).val()
+            var beforeValue = $(this).attr('temp_desc');
+
+            form_input.forEach(function (item, i) {
+                if (item.imgDesc == beforeValue) form_input[i].imgDesc = changeValue;
+            });
+            $('#imagemanager').val(
+                JSON.stringify(form_input)
+            )
+        })
+    }
+    let HandleBtnImagemanagerDelete = function () {
+        $(document).on('click', '.btnImagemanagerDelete', function () {
+
+            let file_delete = $(this).parents('.kt-widget4__item').find('input').val()
+            let file_id = $(this).attr('imagemanagerid')
+            $(this).parents('.kt-widget4__item').remove()
+            let file = JSON.parse($('#' + file_id).val())
+                .filter((file) => {
+                    return file.imgName != file_delete
+                })
+
+            $('#' + file_id).val(
+                JSON.stringify(file)
+            )
+        })
+
+    }
+    // endImageManager
+
+
     // form submit
     let handleFormSubmit = function () {
         $('.my-btn-submit').click(function (e) {
@@ -211,7 +356,10 @@ let MY_form = function () {
         init: function () {
             handleFormSubmit();
             handleButtonCancel();
-            HandlebtnfileUploadDelete();
+            HandleBtnfileUploadDelete();
+            HandleBtnImagemanagerDelete();
+            HandleChangeName();
+            HandleChangeDesc();
         },
         select2: function ($selector) {
             $($selector).select2();
@@ -221,6 +369,11 @@ let MY_form = function () {
         },
         fileupload: function ($id_element) {
             createFileUpload($id_element)
+            generate_file($id_element)
+
+        },
+        imagemanager: function ($id_element) {
+            createImagemanager($id_element)
             generate_file($id_element)
 
         },

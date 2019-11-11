@@ -97,7 +97,13 @@ class Test extends CI_Controller
 			'type' => 'fileupload',
 			'label' => 'Upload File' ,
 			'name' => 'fileupload',
-			'value' => $data['fileupload']??'',
+			'value' => $data['fileupload'] ?? '',
+		]);
+		add_form_field([
+			'type' => 'imagemanager',
+			'label' => 'Upload Image' ,
+			'name' => 'imagemanager',
+			'value' => $data['imagemanager'] ?? '',
 		]);
 		
 		$this->child_breadcrumb = $page_name;

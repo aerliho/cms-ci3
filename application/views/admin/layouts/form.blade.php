@@ -26,6 +26,7 @@ $CI =& get_instance();
                                 @includeWhen($item['type'] == 'select', 'admin.layouts.component.select', ['data' => $item])
                                 @includeWhen($item['type'] == 'textarea', 'admin.layouts.component.textarea', ['data' => $item])
                                 @includeWhen($item['type'] == 'fileupload', 'admin.layouts.component.fileupload', ['data' => $item])
+                                @includeWhen($item['type'] == 'imagemanager', 'admin.layouts.component.imagemanager', ['data' => $item])
                             @endforeach
                         </div>  
                         
@@ -69,6 +70,7 @@ $CI =& get_instance();
             MY_form.time('.my_time');    
             MY_form.ckeditor('.my_ckeditor')
             MY_form.fileupload('.my_fileUpload')
+            MY_form.imagemanager('.my_Imagemanager')
         })
     </script>
 
@@ -77,4 +79,5 @@ $CI =& get_instance();
 @section('additional_html')
     @parent
     @include('admin.layouts.component._listFileupload')
+    @include('admin.layouts.component._listImagemanager')
 @endsection
