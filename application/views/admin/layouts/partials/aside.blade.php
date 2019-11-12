@@ -52,123 +52,123 @@
 		<div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
 			<ul class="kt-menu__nav ">
 				@foreach ($menu as $list)
-					{{-- nested menu 2 --}}
-					@isset($list['sub'])
-						<li class="kt-menu__item  kt-menu__item--submenu 
+				{{-- nested menu 2 --}}
+				@isset($list['sub'])
+				<li class="kt-menu__item  kt-menu__item--submenu 
 							@isset($list['active'])
 								kt-menu__item--open
 							@endisset					
 							" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
 
-							<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-								<i class="kt-menu__link-icon flaticon-tabs"></i>
-								<span class="kt-menu__link-text">{{$list['name']}}</span>
-								<i class="kt-menu__ver-arrow la la-angle-right"></i>
-							</a>
+					<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+						<i class="kt-menu__link-icon {{$list['icon']}}"></i>
+						<span class="kt-menu__link-text">{{$list['name']}}</span>
+						<i class="kt-menu__ver-arrow la la-angle-right"></i>
+					</a>
 
-							<div class="kt-menu__submenu ">
-								<span class="kt-menu__arrow"></span>
-								<ul class="kt-menu__subnav">
-									
-									@foreach ($list['sub'] as $sub)
-										{{-- nested menu 3--}}
-										@isset($sub['sub'])
-											<li class="kt-menu__item  kt-menu__item--submenu
+					<div class="kt-menu__submenu ">
+						<span class="kt-menu__arrow"></span>
+						<ul class="kt-menu__subnav">
+
+							@foreach ($list['sub'] as $sub)
+							{{-- nested menu 3--}}
+							@isset($sub['sub'])
+							<li class="kt-menu__item  kt-menu__item--submenu
 												@isset($sub['active'])
 													kt-menu__item--open
 												@endisset" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
 
-												<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-													<i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-													<span class="kt-menu__link-text">{{$sub['name']}}</span>
-													@isset($sub['badge'])
-														<span class="kt-menu__link-badge">
-															<span class="kt-badge kt-badge--rounded kt-badge--brand">$sub['badge']</span>
-														</span>
-													@endisset
-													<i class="kt-menu__ver-arrow la la-angle-right"></i>
-												</a>
+								<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+									<i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
+									<span class="kt-menu__link-text">{{$sub['name']}}</span>
+									@isset($sub['badge'])
+									<span class="kt-menu__link-badge">
+										<span class="kt-badge kt-badge--rounded kt-badge--brand">$sub['badge']</span>
+									</span>
+									@endisset
+									<i class="kt-menu__ver-arrow la la-angle-right"></i>
+								</a>
 
-												<div class="kt-menu__submenu ">
-													<span class="kt-menu__arrow"></span>
-													<ul class="kt-menu__subnav">
+								<div class="kt-menu__submenu ">
+									<span class="kt-menu__arrow"></span>
+									<ul class="kt-menu__subnav">
 
-														@foreach ($sub['sub'] as $sub2)
-															{{-- single menu 3 --}}
-															<li class="kt-menu__item 
-																@isset($sub2['active']) 
-																	kt-menu__item--active
-																@endisset" aria-haspopup="true">
-																<a href="{{$base_url}}admin/{{$sub2['controller']}}" class="kt-menu__link ">
-																	<i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-																	
-																	<span class="kt-menu__link-text">{{$sub2['name']}}</span>
-																	@isset($sub['badge'])
-																		<span class="kt-menu__link-badge">
-																			<span class="kt-badge kt-badge--rounded kt-badge--brand">$sub['badge']</span>
-																		</span>
-																	@endisset
-																</a>
-															</li>
-														@endforeach
-														
-													</ul>
-												</div>
-											</li>
-										@endisset
-										
-										{{-- single menu 2 --}}
-										@empty($sub['sub'])
+										@foreach ($sub['sub'] as $sub2)
+										{{-- single menu 3 --}}
 										<li class="kt-menu__item 
-											@isset($sub['active'])
-												kt-menu__item--active
-											@endisset" aria-haspopup="true">
-											
-											<a href="{{$base_url}}admin/{{$sub['controller']}}" class="kt-menu__link ">
+												@isset($sub2['active']) 
+													kt-menu__item--active
+												@endisset" aria-haspopup="true">
+											<a href="{{$base_url}}admin/{{$sub2['controller']}}" class="kt-menu__link ">
 												<i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-												<span class="kt-menu__link-text">{{$sub['name']}}</span>
-											</a>
-											@isset($sub['badge'])
+
+												<span class="kt-menu__link-text">{{$sub2['name']}}</span>
+												@isset($sub['badge'])
 												<span class="kt-menu__link-badge">
 													<span class="kt-badge kt-badge--rounded kt-badge--brand">$sub['badge']</span>
 												</span>
-											@endisset
+												@endisset
+											</a>
 										</li>
-										@endempty
+										@endforeach
 
-									@endforeach
+									</ul>
+								</div>
+							</li>
+							@endisset
 
-								</ul>
-							</div>
-						</li>
-					@endisset
-					
-					{{-- single menu --}}
-					@empty($list['sub'])
-						@if($list['name'] != '')
+							{{-- single menu 2 --}}
+							@empty($sub['sub'])
 							<li class="kt-menu__item 
+											@isset($sub['active'])
+												kt-menu__item--active
+											@endisset" aria-haspopup="true">
+
+								<a href="{{$base_url}}admin/{{$sub['controller']}}" class="kt-menu__link ">
+									<i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
+									<span class="kt-menu__link-text">{{$sub['name']}}</span>
+								</a>
+								@isset($sub['badge'])
+								<span class="kt-menu__link-badge">
+									<span class="kt-badge kt-badge--rounded kt-badge--brand">$sub['badge']</span>
+								</span>
+								@endisset
+							</li>
+							@endempty
+
+							@endforeach
+
+						</ul>
+					</div>
+				</li>
+				@endisset
+
+				{{-- single menu --}}
+				@empty($list['sub'])
+				@if($list['name'] != '')
+				<li class="kt-menu__item 
 								@isset($list['active'])
 									kt-menu__item--active
 								@endisset" aria-haspopup="true">
-								<a href="{{$base_url}}admin/{{$list['controller']}}" class="kt-menu__link ">
-									<i class="kt-menu__link-icon {{$list['icon']}}"></i>
-									<span class="kt-menu__link-text">{{$list['name']}}</span>
-								</a>
-							</li>
-						@endif
-					@endempty
+					<a href="{{$base_url}}admin/{{$list['controller']}}" class="kt-menu__link ">
+						<i class="kt-menu__link-icon {{$list['icon']}}"></i>
+						<span class="kt-menu__link-text">{{$list['name']}}</span>
+					</a>
+				</li>
+				@endif
+				@endempty
 
-					{{-- section --}}
-					@if($list['group'] != '')
-						<li class="kt-menu__section
+				{{-- section --}}
+				@if($list['group'] != '')
+				<li class="kt-menu__section
 							@isset($list['active'])
 								kt-menu__item--active
 							@endisset
 							">
-							<h4 class="kt-menu__section-text">{{$list['group']}}</h4>
-							<i class="kt-menu__section-icon flaticon-more-v2"></i>
-						</li>
-					@endif
+					<h4 class="kt-menu__section-text">{{$list['group']}}</h4>
+					<i class="kt-menu__section-icon flaticon-more-v2"></i>
+				</li>
+				@endif
 
 				@endforeach
 
