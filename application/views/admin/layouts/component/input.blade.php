@@ -5,10 +5,15 @@
              <input 
                 name="{{ $data['name'] }}"
                 value="{{ isset($data['value']) ? $data['value'] : ''}}"
-                type="{{ isset($data['type']) ? $data['type']  : 'text'}}"
+                type="{{ isset($data['type_field']) ? $data['type_field']  : 'text'}}"
                 id="{{ isset($data['id']) ? $data['id'] : $data['name'] }}"
                 class="form-control {{ isset($data['class']) ? $data['class'] : '' }}"
                 placeholder="{{ isset($data['placeholder']) ? $data['placeholder'] : '' }}"
+
+
+                @isset($data['custom_attribute'])
+                    {{$data['custom_attribute']}}
+                @endisset
 
                 @isset($data['readonly'])
                     readonly

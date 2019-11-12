@@ -48,7 +48,7 @@ class Test extends CI_Controller
 		]);
 
 		add_form_field([
-			'type' => 'input',
+			'type' => 'datetime',
 			'label' => 'DateTime',
 			'class' => 'my_datetime',
 			'name' => 'datetime',
@@ -57,7 +57,7 @@ class Test extends CI_Controller
 		]);
 
 		add_form_field([
-			'type' => 'input',
+			'type' => 'date',
 			'label' => 'Date',
 			'class' => 'my_date',
 			'name' => 'date',
@@ -66,7 +66,7 @@ class Test extends CI_Controller
 		]);
 
 		add_form_field([
-			'type' => 'input',
+			'type' => 'time',
 			'label' => 'Time',
 			'class' => 'my_time',
 			'name' => 'time',
@@ -86,7 +86,7 @@ class Test extends CI_Controller
 		]);
 
 		add_form_field([
-			'type' => 'textarea',
+			'type' => 'ckeditor',
 			'label' => 'ckeditor' ,
 			'name' => 'ckeditor',
 			'id' => 'ckeditor1',
@@ -105,7 +105,6 @@ class Test extends CI_Controller
 			'name' => 'imagemanager',
 			'value' => $data['imagemanager'] ?? '',
 		]);
-		
 		$this->child_breadcrumb = $page_name;
 		// print_r($this);
 		// exit;/

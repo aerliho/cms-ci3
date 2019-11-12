@@ -1,6 +1,7 @@
 @section('subheader')    
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
+            <button class="kt-subheader__mobile-toggle kt-subheader__mobile-toggle--left kt-hide" id="kt_subheader_mobile_toggle"><span></span></button>
             <h3 class="kt-subheader__title"> {{$page_name}} </h3>
             <span class="kt-subheader__separator kt-hidden">
             </span>

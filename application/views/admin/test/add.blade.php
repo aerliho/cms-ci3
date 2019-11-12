@@ -1,9 +1,7 @@
 @extends('admin.layouts.main')
 
-@include('admin.layouts.form')
+@include('admin.layouts.default_form')
 
 @section('content')
-    {{-- {{$form['name']}} --}}
-    @yield('form')
-
+    @yield('form_layout')
 @endsection

@@ -1,4 +1,4 @@
-<div id="template_Imagemanager">
+<div id="template_Imagemanager" class="kt-hide">
     <div class="kt-widget4__item">
         <div class="kt-widget4__pic">
             <a href="__link1__" target="_blank">

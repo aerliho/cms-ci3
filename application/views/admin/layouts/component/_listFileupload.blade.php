@@ -1,4 +1,4 @@
-<div id="template_fileUpload">
+<div id="template_fileUpload" class="kt-hide">
 
     <div class="kt-widget4__item">
         <div class="kt-widget4__pic kt-widget4__pic--icon">

@@ -91,24 +91,34 @@ if (!function_exists('generate_form')) {
 	* disabled
 	* note
 	 * **/
-	function generate_form($name,$action)
+	function generate_form($name,$action,$back_url='')
 	{
 		
 		$CI =& get_instance();
 		
 		$CI->data['form']['name'] = $name;
 		$CI->data['form']['action'] =$action;
+		$CI->data['form']['back-url'] =$back_url;
 	}
 
 	function add_form_field($list)
 	{
 		$CI = &get_instance();
-		if ($list['type'] == 'select') {
+		switch ($list['type']) {
+			case 'select':
 			selectlist2($list);
+				break;
+
+			default:
+				if ( !isset($CI->data['form']['has'.$list['type']]) ) {
+					$CI->data['form']['has' . $list['type']] = true;
+				}
+
+				break;
 		}
 		$CI->data['form']['list'][] = $list;	
 	}
-
+	
 	function selectlist2(&$list)
 	{
 		$CI = &get_instance();
@@ -123,7 +133,7 @@ if (!function_exists('generate_form')) {
 		$selected          = isset($opt_data['selected']) ?$opt_data['selected']: '';
 		$multiple_selected = isset($opt_data['multiple_selected']) ?$opt_data['multiple_selected']:[];
 
-		$title             = $opt_data['title'] ; 
+		$title             = isset($opt_data['title'])  ? $opt_data['title']: ''; 
 		$select_query 	   = $id . ', ' .$name.', ' . $concat;
 		$order_direction   = isset($opt_data['order']) ? 'desc' : 'asc';
 		$order_name		   = isset($opt_data['order']) ? $opt_data['order'] : $name;
@@ -136,7 +146,7 @@ if (!function_exists('generate_form')) {
 							->select($select_query, FALSE)
 							->get($tbl)
 							->result_array();
-		$opt               = isset($opt_data['no_title']) ? '' : '<option value="">' . $title . '</option>';
+		$opt               = $title == ''  ? '' : '<option value="">' . $title . '</option>';
 		$opt               .= isset($opt_data['add_new']) ? '<option value="addNew">+ Add '.$opt_data['add_new'].'</option>' : '';
 		
 		foreach ($opts as $l) {

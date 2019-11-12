@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Homepage extends CI_Controller
+class Login extends CI_Controller
 {
 	
 	public function __construct()
@@ -19,12 +19,10 @@ class Homepage extends CI_Controller
 		$this->data['page_name'] = 'Login';
 	}
 
-	public function login(){
-		$this->load->model('auth_model');
-
-		
+	public function login(){		
 		$post = $this->input->post();
 		$res  = [];
+		$res['msg'] = "Error";
 		$cookie_user =  $this->input->cookie('remember_me', true);
 		if (isset($cookie_user)) {
 			$post['username'] = $cookie_user;
@@ -36,14 +34,15 @@ class Homepage extends CI_Controller
 			->or_where('a.email', $post['username']);
 			
 		$check_username = $this->db->select('a.*,b.name as group')->get('user a')->row_array();
-
 		if (!$check_username) {
-			return;
+			echo json_encode($res);
+			exit;
 		}
 		if (!$cookie_user) {
 			$check_password = password_verify($post['password'],$check_username['userpass']);
 			if (!$check_password) {
-				return;
+				echo json_encode($res);
+				exit;
 			}
 		}		
 
@@ -68,7 +67,8 @@ class Homepage extends CI_Controller
 			'group' => $user['group'],
 			'first_name' => $user['first_name'],
 			'last_name' => $user['last_name'],
-			'email' => $user['email']
+			'email' => $user['email'],
+			'phone' => $user['phone']
 		];
 		$this->session->set_userdata(NAME_SESSION_ADMIN, $user_sess);
 
