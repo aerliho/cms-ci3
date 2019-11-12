@@ -26,7 +26,7 @@
                     <div class="kt-widget kt-widget--user-profile-1">
                         <div class="kt-widget__head">
                             <div class="kt-widget__media">
-                                <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--rounded kt-badge--bold">S</span>
+                                <span class="kt-badge kt-badge--unified-success kt-badge--xl kt-badge--rounded kt-badge--bold">{{$ADM_SESS['first_character']}}</span>
                             </div>
                             <div class="kt-widget__content">
                                 <div class="kt-widget__section">
